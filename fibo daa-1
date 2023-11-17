@@ -1,0 +1,54 @@
+*******recurcive*******
+
+#include <iostream>
+
+using namespace std;
+
+int fibonacci(int n) {
+    if (n == 0 || n == 1) {
+        return n;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
+}
+
+int main() {
+    int n;
+
+    cout << "Enter the number of terms: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        cout << fibonacci(i) << " ";
+    }
+
+    return 0;
+}
+
+********nonrecurcive********
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    int n;
+    int a = 0;
+    int b = 1;
+    int c;
+
+    cout << "Enter the number of terms: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        cout << a << " ";
+
+        c = a + b;
+        a = b;
+        b = c;
+    }
+
+    return 0;
+}
+
+
