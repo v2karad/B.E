@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+const int MAX_N = 1e3 + 2;  // Increased array size
+int dp[MAX_N][MAX_N];    // Initialized outside main function
+int wt[MAX_N];
+int val[MAX_N];
+
+int knapsack(int n, int w) {
+  if (w <= 0) {
+    return 0;
+  } else if (n <= 0) {
+    return 0;
+  } else if (wt[n - 1] > w) {
+    return knapsack(n - 1, w);
+  }
+
+  // Check if the value is already calculated
+  if (dp[n][w] != -1) {
+    return dp[n][w];
+  }
+
+  dp[n][w] = max(knapsack(n - 1, w), knapsack(n - 1, w - wt[n - 1]) + val[n - 1]);
+  return dp[n][w];
+}
+
+int main() {
+  int n, w;
+
+  // Initialize dp array with -1
+  for (int i = 0; i < MAX_N; i++) {
+    for (int j = 0; j < MAX_N; j++) {
+      dp[i][j] = -1;
+    }
+  }
+
+  cout << "Enter no of items: ";
+  cin >> n;
+
+  cout << "Enter wt array: ";
+  for (int i = 0; i < n; i++) {
+    cin >> wt[i];
+  }
+
+  cout << "Enter val array: ";
+  for (int i = 0; i < n; i++) {
+    cin >> val[i];
+  }
+
+  cout << "Enter capacity: ";
+  cin >> w;
+
+  cout << "Maximum profit: " << knapsack(n, w) << endl;
+
+  return 0;
+}
